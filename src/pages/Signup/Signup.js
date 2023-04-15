@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -28,6 +28,11 @@ const Signup = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) navigate('/todo');
+  }, [navigate]);
 
   return (
     <SignupContainer>

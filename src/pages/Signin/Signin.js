@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import API from '../../api/api';
@@ -30,6 +30,11 @@ const Signin = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) navigate('/todo');
+  }, [navigate]);
 
   return (
     <SigninContainer>
