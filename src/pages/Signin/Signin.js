@@ -1,13 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import API from '../../api/api';
 import useInput from '../../hooks/useInput';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
+  const navigate = useNavigate();
+
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
 
   const isValid = email.includes('@') && password.length >= 8;
+
+  const onSubmit = async e => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(`${API.SIGNIN}`, {
+        headers: { ' Content-Type': 'application/json' },
+        email: email,
+        password: password,
+      });
+      const token = response.data.access_token;
+      localStorage.setItem('access_token', token);
+      navigate('/todo');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <SigninContainer>
@@ -15,7 +37,7 @@ const Signin = () => {
         <Logo>
           <h1 style={{ fontSize: '25px' }}>Wanted TODO</h1>
         </Logo>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <FormDiv>
             <label htmlFor="user-email">이메일</label>
             <FormInput
