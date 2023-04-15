@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -14,24 +14,27 @@ const Signup = () => {
 
   const isValid = email.includes('@') && password.length >= 8;
 
-  const onSubmit = async e => {
-    e.preventDefault();
+  const onSubmit = useCallback(
+    async e => {
+      e.preventDefault();
 
-    try {
-      await axios.post(`${API.SIGNUP}`, {
-        headers: { ' Content-Type': 'application/json' },
-        email: email,
-        password: password,
-      });
-      navigate('/signin');
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      try {
+        await axios.post(`${API.SIGNUP}`, {
+          headers: { ' Content-Type': 'application/json' },
+          email: email,
+          password: password,
+        });
+        navigate('/signin');
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [navigate, email, password]
+  );
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
-    if (token) navigate('/todo');
+    if (token) return navigate('/todo');
   }, [navigate]);
 
   return (

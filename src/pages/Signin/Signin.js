@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
 import API from '../../api/api';
@@ -14,26 +14,29 @@ const Signin = () => {
 
   const isValid = email.includes('@') && password.length >= 8;
 
-  const onSubmit = async e => {
-    e.preventDefault();
+  const onSubmit = useCallback(
+    async e => {
+      e.preventDefault();
 
-    try {
-      const response = await axios.post(`${API.SIGNIN}`, {
-        headers: { ' Content-Type': 'application/json' },
-        email: email,
-        password: password,
-      });
-      const token = response.data.access_token;
-      localStorage.setItem('access_token', token);
-      navigate('/todo');
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      try {
+        const res = await axios.post(`${API.SIGNIN}`, {
+          headers: { ' Content-Type': 'application/json' },
+          email: email,
+          password: password,
+        });
+        const token = res.data.access_token;
+        localStorage.setItem('access_token', token);
+        if (token) navigate('/todo');
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [navigate, email, password]
+  );
 
   useEffect(() => {
     const token = localStorage.getItem('access_token');
-    if (token) navigate('/todo');
+    if (token) return navigate('/todo');
   }, [navigate]);
 
   return (

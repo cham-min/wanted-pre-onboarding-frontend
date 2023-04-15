@@ -7,7 +7,7 @@ const Todo = () => {
   useEffect(() => {
     const token = localStorage.getItem('acces_token');
 
-    if (!token) navigate('/signin');
+    if (!token) return navigate('/signin');
   }, [navigate]);
 
   return <div>Todo Page</div>;
