@@ -5,7 +5,7 @@ const Todo = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('acces_token');
+    const token = localStorage.getItem('access_token');
 
     if (!token) return navigate('/signin');
   }, [navigate]);
