@@ -44,10 +44,10 @@
 
 ### Assignment 5
 
-- [ ] `/todo` 경로에 접속하면 TODO 리스트 목록을 보여줌
-- [ ] 목록에서 TODO의 내용과 완료 여부를 표시
-- [ ] TODO의 완료 여부는 `<input type="checkbox" />`를 통해 표현
-- [ ] TODO는 `<li>`로 감싸기
+- [x] `/todo` 경로에 접속하면 TODO 리스트 목록을 보여줌
+- [x] 목록에서 TODO의 내용과 완료 여부를 표시
+- [x] TODO의 완료 여부는 `<input type="checkbox" />`를 통해 표현
+- [x] TODO는 `<li>`로 감싸기
 
 <br>
 
