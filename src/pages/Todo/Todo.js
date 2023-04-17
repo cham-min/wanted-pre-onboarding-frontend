@@ -5,34 +5,34 @@ import styled from 'styled-components';
 
 import API from '../../api/api';
 import TodoItem from '../../components/Todo/TodoItem';
+import TodoInput from '../../components/Todo/TodoInput';
 
 const Todo = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem('access_token');
 
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
+    if (!token) return navigate('/signin');
+  }, [token, navigate]);
 
-    if (!token) {
-      return navigate('/signin');
-    } else {
-      const getTodoList = async () => {
-        try {
-          const res = await axios.get(`${API.GETTODO}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setTodoList(res.data);
-        } catch (error) {
-          console.error(error);
-        }
-      };
+  useEffect(() => {
+    const getTodoList = async () => {
+      try {
+        const res = await axios.get(`${API.GETTODO}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setTodoList(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-      getTodoList();
-    }
-  }, []);
+    getTodoList();
+  }, [token]);
 
   return (
     <TodoContainer>
@@ -41,6 +41,7 @@ const Todo = () => {
           <h1 style={{ fontSize: '25px' }}>Wanted TODO</h1>
         </Logo>
         <TodoItem todoList={todoList} />
+        <TodoInput token={token} setTodoList={setTodoList} />
       </TodoWrapper>
     </TodoContainer>
   );

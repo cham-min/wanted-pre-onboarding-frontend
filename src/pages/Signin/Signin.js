@@ -20,7 +20,7 @@ const Signin = () => {
 
       try {
         const res = await axios.post(`${API.SIGNIN}`, {
-          headers: { ' Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           email: email,
           password: password,
         });

@@ -19,6 +19,7 @@ const TodoItem = ({ todoList }) => {
 const TodoItemContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: 1.5rem;
 `;
 
 const TodoItemLi = styled.li`

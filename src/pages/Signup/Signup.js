@@ -20,7 +20,7 @@ const Signup = () => {
 
       try {
         await axios.post(`${API.SIGNUP}`, {
-          headers: { ' Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           email: email,
           password: password,
         });
