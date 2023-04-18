@@ -4,11 +4,12 @@ import styled from 'styled-components';
 
 import API from '../../api/api';
 
-const TodoItem = ({ token, item }) => {
+const TodoItem = ({ token, item, todoList, setTodoList }) => {
   const { id, todo, isCompleted } = item;
 
   const [isChecked, setIsChecked] = useState(isCompleted);
 
+  // UPDATE
   const updateTodo = useCallback(
     async e => {
       try {
@@ -32,6 +33,18 @@ const TodoItem = ({ token, item }) => {
     [token, id, todo]
   );
 
+  // DELETE
+  const deleteTodo = useCallback(async () => {
+    try {
+      await axios.delete(`${API.DELETETODO}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setTodoList(todoList.filter(todo => todo.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  }, [token, id, todoList, setTodoList]);
+
   const toggle = useCallback(() => {
     setIsChecked(prev => !prev);
   }, []);
@@ -48,7 +61,9 @@ const TodoItem = ({ token, item }) => {
         <span>{todo}</span>
       </TodoItemLabel>
       <TodoItemButton data-testid="modify-button">수정</TodoItemButton>
-      <TodoItemButton data-testid="delete-button">삭제</TodoItemButton>
+      <TodoItemButton data-testid="delete-button" onClick={deleteTodo}>
+        삭제
+      </TodoItemButton>
     </TodoItemLi>
   );
 };

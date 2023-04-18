@@ -31,7 +31,13 @@ const TodoList = ({ token }) => {
     <TodoListContainer>
       <ul>
         {todoList.map(item => (
-          <TodoItem key={item.id} token={token} item={item} />
+          <TodoItem
+            key={item.id}
+            token={token}
+            item={item}
+            todoList={todoList}
+            setTodoList={setTodoList}
+          />
         ))}
       </ul>
       <TodoInput token={token} setTodoList={setTodoList} />

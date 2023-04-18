@@ -6,6 +6,7 @@ const API = {
   GETTODO: `${BASE_URL}/todos`,
   ADDTODO: `${BASE_URL}/todos`,
   UPDATETODO: `${BASE_URL}/todos`,
+  DELETETODO: `${BASE_URL}/todos`,
 };
 
 export default API;
