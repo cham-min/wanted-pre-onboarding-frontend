@@ -28,12 +28,14 @@ const TodoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 `;
 
 const Logo = styled.header`
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
   padding: 1rem 0rem;
   font-size: 25px;
 `;

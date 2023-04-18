@@ -55,13 +55,15 @@ const InputContainer = styled.div`
 
 const Input = styled.input`
   padding: 0.5rem;
-  width: 13.5rem;
+  width: 70%;
 `;
 
 const AddButton = styled.button`
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 0.5rem 1rem;
+  width: 3rem;
+  height: 2rem;
   border: 1px solid black;
   background-color: #658dc6;
 `;

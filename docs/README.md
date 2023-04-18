@@ -69,9 +69,9 @@
 
 ### Assignment 8
 
-- [ ] TODO 우측에 수정버튼, 삭제버튼을 구현
-  - [ ] 수정 버튼에는 `data-testid="modify-button"` 속성 부여
-  - [ ] 삭제 버튼에는 `data-testid="delete-button"` 속성 부여
+- [x] TODO 우측에 수정버튼, 삭제버튼을 생성
+  - [x] 수정 버튼에는 `data-testid="modify-button"` 속성 부여
+  - [x] 삭제 버튼에는 `data-testid="delete-button"` 속성 부여
 
 <br>
 

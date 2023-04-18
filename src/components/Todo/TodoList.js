@@ -27,8 +27,6 @@ const TodoList = ({ token }) => {
     getTodoList();
   }, [getTodoList]);
 
-  console.log(todoList);
-
   return (
     <TodoListContainer>
       <ul>
@@ -44,7 +42,7 @@ const TodoList = ({ token }) => {
 const TodoListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 22rem;
+  width: 30rem;
   padding: 2rem;
   border: 1.5px solid #658dc6;
   border-radius: 1rem;
