@@ -5,6 +5,7 @@ const API = {
   SIGNIN: `${BASE_URL}/auth/signin`,
   GETTODO: `${BASE_URL}/todos`,
   ADDTODO: `${BASE_URL}/todos`,
+  UPDATETODO: `${BASE_URL}/todos`,
 };
 
 export default API;
