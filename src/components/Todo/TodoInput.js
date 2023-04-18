@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useCallback } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import API from '../../api/api';
@@ -8,28 +8,25 @@ import useInput from '../../hooks/useInput';
 const TodoInput = ({ token, setTodoList }) => {
   const [todo, onChangeTodo, setTodo] = useInput('');
 
-  const addTodo = useCallback(
-    async e => {
-      try {
-        const res = await axios.post(
-          `${API.ADDTODO}`,
-          { todo: todo },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-
-        setTodoList(prev => [...prev, res.data]);
-        setTodo('');
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    [token, todo, setTodo, setTodoList]
-  );
+  // CREATE
+  const addTodo = useCallback(async () => {
+    try {
+      const res = await axios.post(
+        `${API.ADDTODO}`,
+        { todo: todo },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setTodoList(prev => [...prev, res.data]);
+      setTodo('');
+    } catch (error) {
+      console.error(error);
+    }
+  }, [token, todo, setTodo, setTodoList]);
 
   return (
     <InputContainer>
@@ -58,7 +55,7 @@ const InputContainer = styled.div`
 
 const Input = styled.input`
   padding: 0.5rem;
-  width: 13rem;
+  width: 13.5rem;
 `;
 
 const AddButton = styled.button`

@@ -1,35 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const TodoItem = ({ todoList }) => {
+const TodoItem = ({ todo }) => {
   return (
-    <TodoItemContainer>
-      {todoList.map(todo => (
-        <TodoItemLi key={todo.id}>
-          <TodoItemLabel>
-            <input type="checkbox" />
-            <span>{todo.todo}</span>
-          </TodoItemLabel>
-        </TodoItemLi>
-      ))}
-    </TodoItemContainer>
+    <TodoItemLi>
+      <TodoItemLabel>
+        <input type="checkbox" />
+        <span>{todo.todo}</span>
+      </TodoItemLabel>
+    </TodoItemLi>
   );
 };
 
-const TodoItemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 1.5rem;
-`;
-
 const TodoItemLi = styled.li`
   display: flex;
+  width: 100%;
+  word-break: break-all;
 `;
 
 const TodoItemLabel = styled.label`
   display: flex;
   align-items: center;
-  padding: 0.5rem 0rem;
+  padding: 0.7rem 0rem;
 `;
 
 export default TodoItem;
