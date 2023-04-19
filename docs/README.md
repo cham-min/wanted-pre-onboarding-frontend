@@ -1,12 +1,12 @@
 # 회원가입, 로그인
 
-- [ ] `/signup` 경로에 회원가입 기능 개발
-- [ ] `/signin` 경로에 로그인 기능 개발
-- [ ] 페이지 내 이메일 `input`, 비밀번호 `input`, 제출 `button`이 포함된 형태로 구성
-  - [ ] 이메일 `input`에 `data-testid="email-input"` 속성 부여
-  - [ ] 패스워드 `input`에 `data-testid="password-input"` 속성 부여
-  - [ ] 회원가입 페이지 회원가입 `button`에 `data-testid="signup-button"` 속성 부여
-  - [ ] 로그인 페이지 로그인 `button`에 `data-testid="signin-button"` 속성 부여
+- [x] `/signup` 경로에 회원가입 기능 개발
+- [x] `/signin` 경로에 로그인 기능 개발
+- [x] 페이지 내 이메일 `input`, 비밀번호 `input`, 제출 `button`이 포함된 형태로 구성
+  - [x] 이메일 `input`에 `data-testid="email-input"` 속성 부여
+  - [x] 패스워드 `input`에 `data-testid="password-input"` 속성 부여
+  - [x] 회원가입 페이지 회원가입 `button`에 `data-testid="signup-button"` 속성 부여
+  - [x] 로그인 페이지 로그인 `button`에 `data-testid="signin-button"` 속성 부여
 
 <br>
 

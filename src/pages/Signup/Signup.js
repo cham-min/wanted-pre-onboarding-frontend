@@ -52,6 +52,7 @@ const Signup = () => {
               value={email}
               onChange={onChangeEmail}
               placeholder="example@naver.com"
+              data-testid="email-input"
               required
             />
           </FormDiv>
@@ -63,11 +64,16 @@ const Signup = () => {
               value={password}
               onChange={onChangePassword}
               placeholder="비밀번호 8자 이상"
+              data-testid="password-input"
               required
             />
           </FormDiv>
           <FormDiv>
-            <FormButton type="submit" disabled={!isValid}>
+            <FormButton
+              type="submit"
+              disabled={!isValid}
+              data-testid="signup-button"
+            >
               회원가입
             </FormButton>
           </FormDiv>
