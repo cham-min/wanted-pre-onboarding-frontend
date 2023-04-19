@@ -1,3 +1,16 @@
+# 목차
+
+- [배포 링크](#배포-링크)
+- [프로젝트 설치 및 실행](#프로젝트-설치-및-실행)
+
+<br>
+
+# 배포 링크
+
+### [바로가기](https://wanted-pre-onboarding-frontend-e7me38fp6-cham-min.vercel.app/)
+
+<br>
+
 # 프로젝트 설치 및 실행
 
 1. 저장소 클론
@@ -17,9 +30,3 @@ npm install
 ```shell
 npm start
 ```
-
-<br>
-
-# 데모
-
-프로젝트 완료 후 수정 예정
