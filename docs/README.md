@@ -84,12 +84,12 @@
 
 ### Assignment 10
 
-- [ ] TODO 리스트의 수정 기능 구현
-  - [ ] TODO 우측의 수정 버튼을 클릭하면 수정 모드가 활성화 되도록 구현
-  - [ ] 수정모드에서는 TODO의 내용 변경이 가능하며, TODO의 내용이 `input`창 내에 입력된 형태로 변경
-  - [ ] 수정 `input` 창에는 `data-testid="modify-input"` 속성 부여
-  - [ ] 수정모드에서는 TODO의 우측에 제출 버튼과 취소 버튼을 구현
-  - [ ] 제출 `button`에는 `data-testid="submit-button"` 속성 부여
-  - [ ] 취소 `button`에는 `data-testid="cancel-button"` 속성 부여
-  - [ ] 제출 버튼을 누르면 수정한 내용을 제출하여 내용이 업데이트 되도록 구현
-  - [ ] 취소 버튼을 누르면 수정한 내용을 초기화하고, 수정모드를 비활성화
+- [x] TODO 리스트의 수정 기능 구현
+  - [x] TODO 우측의 수정 버튼을 클릭하면 수정 모드가 활성화 되도록 구현
+  - [x] 수정모드에서는 TODO의 내용 변경이 가능하며, TODO의 내용이 `input`창 내에 입력된 형태로 변경
+  - [x] 수정 `input` 창에는 `data-testid="modify-input"` 속성 부여
+  - [x] 수정모드에서는 TODO의 우측에 제출 버튼과 취소 버튼을 구현
+  - [x] 제출 `button`에는 `data-testid="submit-button"` 속성 부여
+  - [x] 취소 `button`에는 `data-testid="cancel-button"` 속성 부여
+  - [x] 제출 버튼을 누르면 수정한 내용을 제출하여 내용이 업데이트 되도록 구현
+  - [x] 취소 버튼을 누르면 수정한 내용을 초기화하고, 수정모드를 비활성화

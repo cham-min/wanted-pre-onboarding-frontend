@@ -3,35 +3,75 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import API from '../../api/api';
+import useInput from '../../hooks/useInput';
 
 const TodoItem = ({ token, item, todoList, setTodoList }) => {
   const { id, todo, isCompleted } = item;
 
   const [isChecked, setIsChecked] = useState(isCompleted);
+  const [isEditing, setIsEditing] = useState(false);
+  const [input, onChangeInput, setInput] = useInput(todo);
 
-  // UPDATE
-  const updateTodo = useCallback(
-    async e => {
-      try {
-        await axios.put(
-          `${API.UPDATETODO}/${id}`,
-          {
-            todo: todo,
-            isCompleted: e.target.checked,
+  const checkToggle = useCallback(() => {
+    setIsChecked(prev => !prev);
+  }, []);
+
+  const editTodo = useCallback(() => {
+    setIsEditing(prev => !prev);
+  }, []);
+
+  const cancelEditTodo = useCallback(() => {
+    setIsEditing(prev => !prev);
+    setInput(todo);
+  }, [setInput, todo]);
+
+  // UPDATE INPUT
+  const updateTodo = useCallback(async () => {
+    try {
+      await axios.put(
+        `${API.UPDATETODO}/${id}`,
+        {
+          todo: input,
+          isCompleted: isChecked,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    [token, id, todo]
-  );
+        }
+      );
+      const nextTodo = todoList.map(item => ({
+        ...item,
+        todo: item.id === id ? input : item.todo,
+      }));
+      setTodoList(nextTodo);
+      setIsEditing(prev => !prev);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [token, id, input, isChecked, todoList, setTodoList]);
+
+  // UPDATE CHECKBOX
+  const updateCheck = useCallback(async () => {
+    try {
+      await axios.put(
+        `${API.UPDATETODO}/${id}`,
+        {
+          todo: todo,
+          isCompleted: !isChecked,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }, [token, id, todo, isChecked]);
 
   // DELETE
   const deleteTodo = useCallback(async () => {
@@ -45,25 +85,45 @@ const TodoItem = ({ token, item, todoList, setTodoList }) => {
     }
   }, [token, id, todoList, setTodoList]);
 
-  const toggle = useCallback(() => {
-    setIsChecked(prev => !prev);
-  }, []);
-
   return (
     <TodoItemLi>
       <TodoItemLabel>
         <input
           type="checkbox"
-          onClick={toggle}
-          onChange={updateTodo}
+          onClick={checkToggle}
+          onChange={updateCheck}
           checked={isChecked}
         />
-        <span>{todo}</span>
+        {isEditing ? (
+          <input
+            type="text"
+            value={input}
+            onChange={onChangeInput}
+            data-testid="modify-input"
+          />
+        ) : (
+          <span>{input}</span>
+        )}
       </TodoItemLabel>
-      <TodoItemButton data-testid="modify-button">수정</TodoItemButton>
-      <TodoItemButton data-testid="delete-button" onClick={deleteTodo}>
-        삭제
-      </TodoItemButton>
+      {isEditing ? (
+        <>
+          <TodoItemButton data-testid="submit-button" onClick={updateTodo}>
+            제출
+          </TodoItemButton>
+          <TodoItemButton onClick={cancelEditTodo} data-testid="cancel-button">
+            취소
+          </TodoItemButton>
+        </>
+      ) : (
+        <>
+          <TodoItemButton data-testid="modify-button" onClick={editTodo}>
+            수정
+          </TodoItemButton>
+          <TodoItemButton data-testid="delete-button" onClick={deleteTodo}>
+            삭제
+          </TodoItemButton>
+        </>
+      )}
     </TodoItemLi>
   );
 };
