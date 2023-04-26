@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 
+import TodoTemplate from '../../components/Todo/TodoTemplate';
+import TodoHead from '../../components/Todo/TodoHead';
 import TodoList from '../../components/Todo/TodoList';
 
 const Todo = () => {
@@ -14,30 +15,11 @@ const Todo = () => {
   }, [token, navigate]);
 
   return (
-    <TodoContainer>
-      <Logo>
-        <h1>Wanted TODO</h1>
-      </Logo>
+    <TodoTemplate>
+      <TodoHead />
       <TodoList token={token} />
-    </TodoContainer>
+    </TodoTemplate>
   );
 };
-
-const TodoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Logo = styled.header`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 5rem;
-  padding: 1rem 0rem;
-  font-size: 25px;
-`;
 
 export default Todo;

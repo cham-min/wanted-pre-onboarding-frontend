@@ -52,6 +52,7 @@ const TodoListContainer = styled.div`
   padding: 2rem;
   border: 1.5px solid #658dc6;
   border-radius: 1rem;
+  background-color: yellow;
 `;
 
 export default TodoList;
