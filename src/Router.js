@@ -9,14 +9,19 @@ import {
 import Signup from './pages/Auth/Signup';
 import Signin from './pages/Auth/Signin';
 import Todo from './pages/Todo/Todo';
+import AuthHOC from './components/HOC/AuthHOC';
+
+const AuthSignup = AuthHOC(Signup, false);
+const AuthSignin = AuthHOC(Signin, false);
+const AuthTodo = AuthHOC(Todo, true);
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route index element={<Navigate to="/signin" />} />
-      <Route path="signup" element={<Signup />} />
-      <Route path="signin" element={<Signin />} />
-      <Route path="todo" element={<Todo />} />
+      <Route path="signup" element={<AuthSignup />} />
+      <Route path="signin" element={<AuthSignin />} />
+      <Route path="todo" element={<AuthTodo />} />
     </Route>
   )
 );

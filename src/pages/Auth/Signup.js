@@ -32,11 +32,6 @@ const Signup = () => {
     [navigate, email, password]
   );
 
-  useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) return navigate('/todo');
-  }, [navigate]);
-
   return (
     <SignupContainer>
       <SignupWrapper>

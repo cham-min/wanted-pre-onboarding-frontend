@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
 import API from '../../api/api';
@@ -33,11 +33,6 @@ const Signin = () => {
     },
     [navigate, email, password]
   );
-
-  useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) return navigate('/todo');
-  }, [navigate]);
 
   return (
     <SigninContainer>
