@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import Router from './Router';
@@ -11,7 +12,7 @@ root.render(
   <>
     <GlobalStyle />
     <ThemeProvider theme={theme}>
-      <Router />
+      <RouterProvider router={Router} />
     </ThemeProvider>
   </>
 );
