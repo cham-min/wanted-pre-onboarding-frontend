@@ -1,89 +1,21 @@
-import React, { useCallback, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
 
-import API from '../../api/api';
-import useInput from '../../hooks/useInput';
+import useTodoItem from '../../hooks/\buseTodoItem';
 
-const TodoItem = ({ token, item, todoList, setTodoList }) => {
-  const { id, todo, isCompleted } = item;
-
-  const [isChecked, setIsChecked] = useState(isCompleted);
-  const [isEditing, setIsEditing] = useState(false);
-  const [input, onChangeInput, setInput] = useInput(todo);
-
-  const checkToggle = useCallback(() => {
-    setIsChecked(prev => !prev);
-  }, []);
-
-  const editTodo = useCallback(() => {
-    setIsEditing(prev => !prev);
-  }, []);
-
-  const cancelEditTodo = useCallback(() => {
-    setIsEditing(prev => !prev);
-    setInput(todo);
-  }, [setInput, todo]);
-
-  // UPDATE INPUT
-  const updateTodo = useCallback(async () => {
-    try {
-      await axios.put(
-        `${API.UPDATETODO}/${id}`,
-        {
-          todo: input,
-          isCompleted: isChecked,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      const nextTodo = todoList.map(item => ({
-        ...item,
-        todo: item.id === id ? input : item.todo,
-      }));
-      setTodoList(nextTodo);
-      setIsEditing(prev => !prev);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [token, id, input, isChecked, todoList, setTodoList]);
-
-  // UPDATE CHECKBOX
-  const updateCheck = useCallback(async () => {
-    try {
-      await axios.put(
-        `${API.UPDATETODO}/${id}`,
-        {
-          todo: todo,
-          isCompleted: !isChecked,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  }, [token, id, todo, isChecked]);
-
-  // DELETE
-  const deleteTodo = useCallback(async () => {
-    try {
-      await axios.delete(`${API.DELETETODO}/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setTodoList(todoList.filter(todo => todo.id !== id));
-    } catch (error) {
-      console.error(error);
-    }
-  }, [token, id, todoList, setTodoList]);
+const TodoItem = ({ item, todoList, setTodoList }) => {
+  const {
+    isEditing,
+    isChecked,
+    modifyInput,
+    handleModifyInput,
+    checkToggle,
+    editTodo,
+    cancelEditTodo,
+    handleUpdateCheck,
+    handleUpdateTodo,
+    handleDeleteTodo,
+  } = useTodoItem(item, todoList, setTodoList);
 
   return (
     <TodoItemLi>
@@ -91,23 +23,26 @@ const TodoItem = ({ token, item, todoList, setTodoList }) => {
         <input
           type="checkbox"
           onClick={checkToggle}
-          onChange={updateCheck}
+          onChange={handleUpdateCheck}
           checked={isChecked}
         />
         {isEditing ? (
           <input
             type="text"
-            value={input}
-            onChange={onChangeInput}
+            value={modifyInput}
+            onChange={handleModifyInput}
             data-testid="modify-input"
           />
         ) : (
-          <span>{input}</span>
+          <span>{modifyInput}</span>
         )}
       </TodoItemLabel>
       {isEditing ? (
         <>
-          <TodoItemButton data-testid="submit-button" onClick={updateTodo}>
+          <TodoItemButton
+            data-testid="submit-button"
+            onClick={handleUpdateTodo}
+          >
             제출
           </TodoItemButton>
           <TodoItemButton onClick={cancelEditTodo} data-testid="cancel-button">
@@ -119,7 +54,10 @@ const TodoItem = ({ token, item, todoList, setTodoList }) => {
           <TodoItemButton data-testid="modify-button" onClick={editTodo}>
             수정
           </TodoItemButton>
-          <TodoItemButton data-testid="delete-button" onClick={deleteTodo}>
+          <TodoItemButton
+            data-testid="delete-button"
+            onClick={handleDeleteTodo}
+          >
             삭제
           </TodoItemButton>
         </>

@@ -1,40 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
 
-import API from '../../api/api';
 import TodoItem from '../../components/Todo/TodoItem';
 import TodoInput from '../../components/Todo/TodoInput';
+import useTodo from '../../hooks/\buseTodo';
 
 const TodoList = ({ token }) => {
-  const [todoList, setTodoList] = useState([]);
-
-  // READ
-  const getTodoList = useCallback(async () => {
-    try {
-      const res = await axios.get(`${API.GETTODO}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTodoList(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [token]);
-
-  useEffect(() => {
-    getTodoList();
-  }, [getTodoList]);
+  const { todoList, setTodoList } = useTodo();
 
   return (
     <TodoListContainer>
       <ul>
-        {todoList.map(item => (
+        {todoList.map(todo => (
           <TodoItem
-            key={item.id}
-            token={token}
-            item={item}
+            key={todo.id}
+            item={todo}
             todoList={todoList}
             setTodoList={setTodoList}
           />
