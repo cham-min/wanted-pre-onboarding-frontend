@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 
@@ -9,17 +9,13 @@ import { setToken } from '../utils/token';
 import { AXIOS_RESULT, TOKEN_KEY } from '../constant/constant';
 
 const useSignup = () => {
-  const navigate = useNavigate();
-
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
   });
-  const [isValid, setIsValid] = useState(false);
 
-  useEffect(() => {
-    setIsValid(signFormValidator(userInfo));
-  }, [userInfo]);
+  const navigate = useNavigate();
+  const isValid = signFormValidator(userInfo);
 
   const handleSubmit = async event => {
     event.preventDefault();
