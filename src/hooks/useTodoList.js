@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import todoAPI from '../api/todoAPI';
 
-const useTodo = () => {
+const useTodoList = () => {
   const [todoList, setTodoList] = useState([]);
 
   const getTodoList = useCallback(async () => {
@@ -21,4 +21,4 @@ const useTodo = () => {
   return { todoList, setTodoList };
 };
 
-export default useTodo;
+export default useTodoList;

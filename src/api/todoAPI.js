@@ -6,6 +6,13 @@ const todoAPI = () => {
     return data;
   };
 
+  const createTodo = async todo => {
+    const { data } = await customAxios.post(`/todos`, {
+      todo: todo,
+    });
+    return data;
+  };
+
   const updateCheck = async (id, todo, isChecked) => {
     const { data } = await customAxios.put(`/todos/${id}`, {
       todo: todo,
@@ -27,7 +34,7 @@ const todoAPI = () => {
     return data;
   };
 
-  return { getTodo, updateCheck, updateTodo, deleteTodo };
+  return { getTodo, createTodo, updateCheck, updateTodo, deleteTodo };
 };
 
 export default todoAPI();

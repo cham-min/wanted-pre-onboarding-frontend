@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import TodoItem from '../../components/Todo/TodoItem';
 import TodoInput from '../../components/Todo/TodoInput';
-import useTodo from '../../hooks/\buseTodo';
+import useTodoList from '../../hooks/useTodoList';
 
-const TodoList = ({ token }) => {
-  const { todoList, setTodoList } = useTodo();
+const TodoList = () => {
+  const { todoList, setTodoList } = useTodoList();
 
   return (
     <TodoListContainer>
@@ -20,7 +20,7 @@ const TodoList = ({ token }) => {
           />
         ))}
       </ul>
-      <TodoInput token={token} setTodoList={setTodoList} />
+      <TodoInput setTodoList={setTodoList} />
     </TodoListContainer>
   );
 };

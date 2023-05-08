@@ -5,12 +5,10 @@ import TodoHead from '../../components/Todo/TodoHead';
 import TodoList from '../../components/Todo/TodoList';
 
 const Todo = () => {
-  const token = localStorage.getItem('access_token');
-
   return (
     <TodoTemplate>
       <TodoHead />
-      <TodoList token={token} />
+      <TodoList />
     </TodoTemplate>
   );
 };

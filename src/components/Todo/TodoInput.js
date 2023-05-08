@@ -1,39 +1,17 @@
-import React, { useCallback } from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
 
-import API from '../../api/api';
-import useInput from '../../hooks/useInput';
+import useTodoInput from '../../hooks/useTodoInput';
 
-const TodoInput = ({ token, setTodoList }) => {
-  const [todo, onChangeTodo, setTodo] = useInput('');
-
-  // CREATE
-  const addTodo = useCallback(async () => {
-    try {
-      const res = await axios.post(
-        `${API.ADDTODO}`,
-        { todo: todo },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      setTodoList(prev => [...prev, res.data]);
-      setTodo('');
-    } catch (error) {
-      console.error(error);
-    }
-  }, [token, todo, setTodo, setTodoList]);
+const TodoInput = ({ setTodoList }) => {
+  const { todoInput, handleTodoInput, addTodo } = useTodoInput(setTodoList);
 
   return (
     <InputContainer>
       <Input
         type="text"
-        value={todo}
-        onChange={onChangeTodo}
+        value={todoInput}
+        onChange={handleTodoInput}
         placeholder="할 일을 입력해주세요."
         data-testid="new-todo-input"
       />
