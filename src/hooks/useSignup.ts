@@ -4,10 +4,11 @@ import { AxiosError } from 'axios';
 
 import { signFormValidator } from '../utils/validation';
 import authAPI from '../api/authAPI';
-import { AXIOS_RESULT } from '../constant/constant';
+import { AXIOS_RESULT } from '../data/constant';
+import { UserForm } from '../types/auth';
 
 const useSignup = () => {
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<UserForm>({
     email: '',
     password: '',
   });
@@ -15,7 +16,7 @@ const useSignup = () => {
   const navigate = useNavigate();
   const isValid = signFormValidator(userInfo);
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
@@ -25,13 +26,13 @@ const useSignup = () => {
     } catch (error) {
       console.error(error);
       if (error instanceof AxiosError) {
-        const errorMessage = error?.response.data.message;
+        const errorMessage = error?.response?.data.message;
         window.alert(errorMessage);
       }
     }
   };
 
-  const handleChange = ({ target }) => {
+  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo(prev => ({ ...prev, [target.name]: target.value }));
   };
 

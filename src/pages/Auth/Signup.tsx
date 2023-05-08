@@ -1,16 +1,15 @@
-import React from 'react';
 import styled from 'styled-components';
 
-import useSignin from '../../hooks/useSignin';
+import useSignup from '../../hooks/useSignup';
 import SignForm from '../../components/Auth/SignForm';
 
-const Signin = () => {
-  const { userInfo, isValid, handleSubmit, handleChange } = useSignin();
+const Signup = () => {
+  const { userInfo, isValid, handleSubmit, handleChange } = useSignup();
 
   return (
-    <SigninContainer>
+    <SignupContainer>
       <SignForm
-        title="로그인"
+        title="회원가입"
         userInfo={userInfo}
         isValid={isValid}
         handleSubmit={handleSubmit}
@@ -18,21 +17,21 @@ const Signin = () => {
       />
       <SignParagraph>
         <a
-          href="/signup"
+          href="/signin"
           style={{
             paddingLeft: '0.5rem',
             fontWeight: 'bold',
             color: '#658dc6',
           }}
         >
-          회원가입 페이지 이동
+          로그인 페이지 이동
         </a>
       </SignParagraph>
-    </SigninContainer>
+    </SignupContainer>
   );
 };
 
-const SigninContainer = styled.div`
+const SignupContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,4 +45,4 @@ const SignParagraph = styled.p`
   margin-top: 1rem;
 `;
 
-export default Signin;
+export default Signup;

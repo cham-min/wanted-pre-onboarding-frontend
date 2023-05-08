@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { BASE_URL, TOKEN_KEY } from '../constant/constant';
+import { BASE_URL, TOKEN_KEY } from '../data/constant';
 import { getToken, removeToken } from '../utils/token';
 
 const customAxios = axios.create({

@@ -1,8 +1,15 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const SignForm = ({ title, userInfo, isValid, handleSubmit, handleChange }) => {
-  const signList = {
+import { SignFormProps } from '../../types/auth';
+
+const SignForm = ({
+  title,
+  userInfo,
+  isValid,
+  handleSubmit,
+  handleChange,
+}: SignFormProps) => {
+  const signList: { [key: string]: string } = {
     회원가입: 'signup-button',
     로그인: 'signin-button',
   };

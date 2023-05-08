@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { ComponentType, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 /**
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
  * @param {boolean} option true: 로그인 유저만 출입 가능한 페이지, false: 비로그인 유저도 출입 가능한 페이지
  * @returns auth 인증된 컴포넌트
  */
-const AuthHOC = (Component, option) => {
+const AuthHOC = (Component: ComponentType, option: boolean) => {
   const AuthChecked = () => {
     const token = localStorage.getItem('access_token');
     const navigate = useNavigate();
