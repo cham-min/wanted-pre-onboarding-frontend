@@ -20,13 +20,18 @@
 └── src
     ├── api
     ├── components
+    │   ├── Auth
+    │   ├── HOC
     │   └── Todo
+    ├── data
     ├── hooks
+    ├── lib
     ├── pages
-    │   ├── Signin
-    │   ├── Signup
+    │   ├── Auth
     │   └── Todo
-    └── styles
+    ├── styles
+    ├── types
+    └── utils
 ```
 
 <br>
